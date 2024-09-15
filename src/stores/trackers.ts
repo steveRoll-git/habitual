@@ -21,5 +21,15 @@ export const useTrackersStore = defineStore('trackers', () => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(trackers))
   }
 
-  return { trackers, writeToStorage }
+  const createNewTracker = (tracker: Tracker) => {
+    trackers.push(tracker)
+    writeToStorage()
+  }
+
+  const resetTracker = (tracker: Tracker) => {
+    tracker.dateReset = Date.now()
+    writeToStorage()
+  }
+
+  return { trackers, writeToStorage, createNewTracker, resetTracker }
 })

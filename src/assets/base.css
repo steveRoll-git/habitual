@@ -1,3 +1,14 @@
+:root {
+  --margin-s: 6px;
+  --margin-m: 12px;
+  --margin-l: 24px;
+
+  --radius-l: 16px;
+
+  --color-background: #3ca1cc;
+  --color-frame-background: #69dbff;
+}
+
 *,
 *::before,
 *::after {
@@ -31,4 +42,8 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+#app {
+  height: 100vh;
 }

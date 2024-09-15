@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useTrackersStore } from '@/stores/trackers'
+import { useTrackersStore, type Tracker } from '@/stores/trackers'
 import { ref } from 'vue'
 
 const store = useTrackersStore()
@@ -7,19 +7,18 @@ const store = useTrackersStore()
 const name = ref('')
 
 const emit = defineEmits<{
-  trackerCreate: []
+  trackerCreate: [tracker: Tracker]
 }>()
 
 const createTracker = () => {
-  store.trackers.push({
+  const newTracker = {
     name: name.value,
     dateCreated: Date.now(),
     dateReset: Date.now()
-  })
+  }
+  store.createNewTracker(newTracker)
 
-  store.writeToStorage()
-
-  emit('trackerCreate')
+  emit('trackerCreate', newTracker)
 }
 </script>
 
