@@ -20,10 +20,25 @@ const resetTracker = () => {
   <div class="tracker-fullscreen">
     <div class="timer-group">
       <div class="timer-frame">
-        {{ days.toString().padStart(2, '0') }}:<!--
-        -->{{ hours.toString().padStart(2, '0') }}:<!--
-        -->{{ minutes.toString().padStart(2, '0') }}:<!--
-        -->{{ seconds.toString().padStart(2, '0') }}
+        <div class="digit-label-group">
+          {{ days.toString().padStart(2, '0') }}
+          <div class="label">Days</div>
+        </div>
+        :
+        <div class="digit-label-group">
+          {{ hours.toString().padStart(2, '0') }}
+          <div class="label">Hours</div>
+        </div>
+        :
+        <div class="digit-label-group">
+          {{ minutes.toString().padStart(2, '0') }}
+          <div class="label">Minutes</div>
+        </div>
+        :
+        <div class="digit-label-group">
+          {{ seconds.toString().padStart(2, '0') }}
+          <div class="label">Seconds</div>
+        </div>
       </div>
       <div class="tracker-purpose">
         without
@@ -38,7 +53,8 @@ const resetTracker = () => {
 
 <style scoped>
 .tracker-fullscreen {
-  position: relative;
+  position: fixed;
+  width: 100vw;
   height: 100%;
 }
 
@@ -50,10 +66,22 @@ const resetTracker = () => {
 }
 
 .timer-frame {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding-top: var(--margin-m);
+  padding-bottom: var(--margin-m);
   font-family: monospace;
   font-size: 48px;
+  line-height: 1;
   background-color: var(--color-frame-background);
   border-radius: var(--radius-l);
+}
+
+.digit-label-group .label {
+  margin-top: var(--margin-s);
+  font-family: var(--font-ui);
+  font-size: 14px;
 }
 
 .tracker-purpose {
