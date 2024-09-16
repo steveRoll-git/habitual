@@ -20,22 +20,31 @@ const resetTracker = () => {
 <template>
   <div class="tracker-fullscreen">
     <div class="timer-group">
-      <div class="timer-frame">
-        <div class="digit-label-group">
-          {{ days.toString().padStart(2, '0') }}
-          <div class="label">Days</div>
+      <div class="timer-font timer-frame">
+        <div class="digit-colon-group" :class="{ 'low-emphasis': days == 0 }">
+          <div class="digit-label-group">
+            {{ days.toString().padStart(2, '0') }}
+            <div class="label">Days</div>
+          </div>
+          :
         </div>
-        :
-        <div class="digit-label-group">
-          {{ hours.toString().padStart(2, '0') }}
-          <div class="label">Hours</div>
+        <div class="digit-colon-group" :class="{ 'low-emphasis': hours == 0 && days == 0 }">
+          <div class="digit-label-group">
+            {{ hours.toString().padStart(2, '0') }}
+            <div class="label">Hours</div>
+          </div>
+          :
         </div>
-        :
-        <div class="digit-label-group">
-          {{ minutes.toString().padStart(2, '0') }}
-          <div class="label">Minutes</div>
+        <div
+          class="digit-colon-group"
+          :class="{ 'low-emphasis': minutes == 0 && hours == 0 && days == 0 }"
+        >
+          <div class="digit-label-group">
+            {{ minutes.toString().padStart(2, '0') }}
+            <div class="label">Minutes</div>
+          </div>
+          :
         </div>
-        :
         <div class="digit-label-group">
           {{ seconds.toString().padStart(2, '0') }}
           <div class="label">Seconds</div>
@@ -53,6 +62,10 @@ const resetTracker = () => {
 </template>
 
 <style scoped>
+.low-emphasis {
+  opacity: 0.25;
+}
+
 .tracker-fullscreen {
   position: fixed;
   width: 100vw;
@@ -66,17 +79,25 @@ const resetTracker = () => {
   text-align: center;
 }
 
+.timer-font {
+  font-family: monospace;
+  line-height: 1;
+  text-align: center;
+}
+
 .timer-frame {
   display: flex;
   flex-direction: row;
   justify-content: center;
   padding-top: var(--margin-m);
   padding-bottom: var(--margin-m);
-  font-family: monospace;
   font-size: 48px;
-  line-height: 1;
   background-color: var(--color-frame-background);
   border-radius: var(--radius-l);
+}
+
+.digit-colon-group {
+  display: flex;
 }
 
 .digit-label-group .label {
