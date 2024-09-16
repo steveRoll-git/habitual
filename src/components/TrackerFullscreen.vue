@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useTrackerTimer } from '@/composables/trackerTimer'
 import { useTrackersStore, type Tracker } from '@/stores/trackers'
+import ResetSlider from './ResetSlider.vue'
 
 const store = useTrackersStore()
 
@@ -46,7 +47,7 @@ const resetTracker = () => {
       </div>
     </div>
     <div class="slider-container">
-      <button @click="resetTracker">Reset</button>
+      <ResetSlider @slide="resetTracker" />
     </div>
   </div>
 </template>
@@ -59,7 +60,7 @@ const resetTracker = () => {
 }
 
 .timer-group {
-  padding-top: 126px;
+  padding-top: 15vh;
   padding-left: var(--margin-m);
   padding-right: var(--margin-m);
   text-align: center;
@@ -87,7 +88,7 @@ const resetTracker = () => {
 .tracker-purpose {
   padding-top: var(--margin-m);
   font-size: 1rem;
-  line-height: 1;
+  line-height: 1.2;
 }
 
 .tracker-purpose .name {
@@ -100,11 +101,5 @@ const resetTracker = () => {
   padding-left: var(--margin-l);
   padding-right: var(--margin-l);
   width: 100%;
-  height: 74px;
-}
-
-.slider-container button {
-  width: 100%;
-  height: 100%;
 }
 </style>

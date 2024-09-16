@@ -6,9 +6,12 @@
   --margin-l: 24px;
 
   --radius-l: 16px;
+  --radius-max: 9999px;
 
+  --color-text: #000;
   --color-background: #3ca1cc;
   --color-frame-background: #69dbff;
+  --color-danger: #ff3232;
 }
 
 *,
