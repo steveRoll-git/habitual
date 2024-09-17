@@ -2,6 +2,9 @@
 import { useTrackerTimer } from '@/composables/trackerTimer'
 import { useTrackersStore, type Tracker } from '@/stores/trackers'
 import ResetSlider from './ResetSlider.vue'
+import IconTrophy from './icons/IconTrophy.vue'
+import { computed } from 'vue'
+import { getDurationDisplayString } from '@/util'
 
 const store = useTrackersStore()
 
@@ -10,6 +13,8 @@ const props = defineProps<{
 }>()
 
 const { days, hours, minutes, seconds, restartTimer } = useTrackerTimer(props.tracker)
+
+const best = computed(() => store.trackerBests.get(props.tracker))
 
 const resetTracker = () => {
   store.resetTracker(props.tracker)
@@ -55,6 +60,16 @@ const resetTracker = () => {
         <div class="name">{{ tracker.name }}</div>
       </div>
     </div>
+    <div class="best-frame" v-if="best">
+      <div class="frame-header">
+        <IconTrophy class="icon" />
+        Best
+      </div>
+      <div class="content">
+        <div class="timer-font">{{ getDurationDisplayString(best.duration) }}</div>
+        Achieved on {{ new Date(best.date).toLocaleDateString() }}
+      </div>
+    </div>
     <div class="slider-container">
       <ResetSlider @slide="resetTracker" />
     </div>
@@ -73,7 +88,7 @@ const resetTracker = () => {
 }
 
 .timer-group {
-  padding-top: 15vh;
+  padding-top: 10vh;
   padding-left: var(--margin-m);
   padding-right: var(--margin-m);
   text-align: center;
@@ -94,6 +109,7 @@ const resetTracker = () => {
   font-size: 48px;
   background-color: var(--color-frame-background);
   border-radius: var(--radius-l);
+  box-shadow: 0px 6px 4px -3px rgba(0, 0, 0, 0.2);
 }
 
 .digit-colon-group {
@@ -114,6 +130,40 @@ const resetTracker = () => {
 
 .tracker-purpose .name {
   font-size: 200%;
+}
+
+.best-frame {
+  margin-top: var(--margin-l);
+  margin-left: var(--margin-l);
+  margin-right: var(--margin-l);
+  padding: var(--margin-m);
+  background-color: var(--color-best);
+  border-radius: var(--radius-l);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.best-frame .content {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+}
+
+.best-frame .timer-font {
+  font-size: 34px;
+}
+
+.frame-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.frame-header .icon {
+  color: var(--color-text);
+  width: 34px;
+  height: 34px;
 }
 
 .slider-container {

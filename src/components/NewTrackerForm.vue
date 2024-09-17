@@ -11,10 +11,10 @@ const emit = defineEmits<{
 }>()
 
 const createTracker = () => {
-  const newTracker = {
+  const newTracker: Tracker = {
     name: name.value,
     dateCreated: Date.now(),
-    dateReset: Date.now()
+    resets: []
   }
   store.createNewTracker(newTracker)
 

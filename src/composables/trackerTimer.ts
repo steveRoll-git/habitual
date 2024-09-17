@@ -1,4 +1,5 @@
 import type { Tracker } from '@/stores/trackers'
+import { getDurationDisplay } from '@/util'
 import { onMounted, onUnmounted, ref } from 'vue'
 
 /**
@@ -14,17 +15,13 @@ export function useTrackerTimer(tracker: Tracker) {
   let intervalID: number | undefined = undefined
 
   const updateTimer = () => {
-    const diffMs = Date.now() - tracker.dateReset
-
-    const secondsElapsed = Math.floor(diffMs / 1000)
-    const minutesElapsed = Math.floor(secondsElapsed / 60)
-    const hoursElapsed = Math.floor(minutesElapsed / 60)
-    const daysElapsed = Math.floor(hoursElapsed / 24)
-
-    days.value = daysElapsed
-    hours.value = hoursElapsed % 24
-    minutes.value = minutesElapsed % 60
-    seconds.value = secondsElapsed % 60
+    const display = getDurationDisplay(
+      Date.now() - (tracker.resets[tracker.resets.length - 1] ?? tracker.dateCreated)
+    )
+    days.value = display.days
+    hours.value = display.hours
+    minutes.value = display.minutes
+    seconds.value = display.seconds
   }
 
   const restartTimer = () => {

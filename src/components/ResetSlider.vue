@@ -98,5 +98,6 @@ onMounted(() => {
   --size: calc(var(--slider-height) * 0.75);
   width: var(--size);
   height: var(--size);
+  color: #fff;
 }
 </style>
