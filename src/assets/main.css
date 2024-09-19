@@ -6,7 +6,21 @@
   right: var(--margin-l);
   top: 50%;
   transform: translateY(-50%);
-  padding: var(--margin-l);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--margin-m);
+  padding: var(--margin-m);
   background-color: var(--color-frame-background);
-  border-radius: var(--radius-l);
+  border-radius: var(--radius-m);
+}
+
+.action-button {
+  display: flex;
+  align-items: center;
+  gap: var(--margin-s);
+  padding: var(--margin-s);
+  border-radius: var(--radius-s);
+  width: fit-content;
 }

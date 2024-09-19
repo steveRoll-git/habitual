@@ -44,9 +44,16 @@ export const useTrackersStore = defineStore('trackers', () => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(trackers))
   }
 
-  const createNewTracker = (tracker: Tracker) => {
-    trackers.push(tracker)
+  const createNewTracker = (name: string) => {
+    const newTracker = {
+      id: (trackers[trackers.length - 1]?.id ?? 0) + 1,
+      name,
+      dateCreated: Date.now(),
+      resets: []
+    }
+    trackers.push(newTracker)
     writeToStorage()
+    return newTracker
   }
 
   const getTrackerByID = (id: number) => {

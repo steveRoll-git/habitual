@@ -29,7 +29,10 @@ onMounted(() => {
       </RouterLink>
     </div>
   </template>
+  <NewTrackerForm
+    v-else-if="creatingNewTracker"
+    @tracker-create="newTrackerCreated"
+    @close="() => (creatingNewTracker = false)"
+  />
   <NoTrackers v-else @new-tracker-click="creatingNewTracker = true" />
-
-  <NewTrackerForm v-if="creatingNewTracker" @tracker-create="newTrackerCreated" />
 </template>

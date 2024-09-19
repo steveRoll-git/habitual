@@ -1,31 +1,36 @@
 <script setup lang="ts">
 import { useTrackersStore, type Tracker } from '@/stores/trackers'
-import { ref } from 'vue'
+import { computed, onMounted, ref, useTemplateRef } from 'vue'
+import ModalWindow from './ModalWindow.vue'
 
 const store = useTrackersStore()
 
 const name = ref('')
 
+const nameInput = useTemplateRef('tracker-name')
+
+const nameInvalid = computed(() => name.value == null || name.value.match(/^ *$/) !== null)
+
+onMounted(() => {
+  nameInput.value?.focus()
+})
+
 const emit = defineEmits<{
   trackerCreate: [tracker: Tracker]
 }>()
 
-const createTracker = () => {
-  const newTracker: Tracker = {
-    id: (store.trackers[store.trackers.length - 1]?.id ?? 0) + 1,
-    name: name.value,
-    dateCreated: Date.now(),
-    resets: []
-  }
-  store.createNewTracker(newTracker)
-
+const createTracker = (e: Event) => {
+  e.preventDefault()
+  const newTracker = store.createNewTracker(name.value.trim())
   emit('trackerCreate', newTracker)
 }
 </script>
 
 <template>
-  <div>
-    <label>Name:<input v-model="name" /></label>
-    <button @click="createTracker">Create</button>
-  </div>
+  <ModalWindow title="Create New Tracker" closable>
+    <form style="display: contents" @submit="createTracker">
+      <label>I want to stop <input ref="tracker-name" v-model="name" /></label>
+      <input type="submit" class="action-button" value="Create" :disabled="nameInvalid" />
+    </form>
+  </ModalWindow>
 </template>
