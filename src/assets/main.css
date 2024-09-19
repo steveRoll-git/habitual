@@ -1,5 +1,10 @@
 @import './base.css';
 
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
 .modal-window {
   position: fixed;
   left: var(--margin-l);

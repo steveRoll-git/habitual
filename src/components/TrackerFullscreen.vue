@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { useTrackerTimer } from '@/composables/trackerTimer'
+import { useTrackerDurationComponents } from '@/composables/trackerTimer'
 import { useTrackersStore, type Tracker } from '@/stores/trackers'
 import ResetSlider from './ResetSlider.vue'
 import IconTrophy from './icons/IconTrophy.vue'
 import { computed } from 'vue'
-import { getDurationDisplayString } from '@/util'
+import { getDurationString } from '@/util'
 
 const store = useTrackersStore()
 
@@ -12,7 +12,7 @@ const props = defineProps<{
   tracker: Tracker
 }>()
 
-const { days, hours, minutes, seconds, restartTimer } = useTrackerTimer(props.tracker)
+const { days, hours, minutes, seconds, restartTimer } = useTrackerDurationComponents(props.tracker)
 
 const best = computed(() => store.trackerBests.get(props.tracker))
 
@@ -66,7 +66,7 @@ const resetTracker = () => {
         Best
       </div>
       <div class="content">
-        <div class="timer-font">{{ getDurationDisplayString(best.duration) }}</div>
+        <div class="timer-font">{{ getDurationString(best.duration) }}</div>
         Achieved on {{ new Date(best.date).toLocaleDateString() }}
       </div>
     </div>

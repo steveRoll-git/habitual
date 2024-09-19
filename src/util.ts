@@ -3,7 +3,7 @@
  * given duration.
  * @param duration A duration in milliseconds.
  */
-export const getDurationDisplay = (duration: number) => {
+export const getDurationComponents = (duration: number) => {
   const secondsElapsed = Math.floor(duration / 1000)
   const minutesElapsed = Math.floor(secondsElapsed / 60)
   const hoursElapsed = Math.floor(minutesElapsed / 60)
@@ -22,8 +22,8 @@ export const getDurationDisplay = (duration: number) => {
  * minutes and seconds zero-padded and separated with a colon.
  * @param duration
  */
-export const getDurationDisplayString = (duration: number) => {
-  const display = getDurationDisplay(duration)
+export const getDurationString = (duration: number) => {
+  const display = getDurationComponents(duration)
   return (
     `${display.days.toString().padStart(2, '0')}:` +
     `${display.hours.toString().padStart(2, '0')}:` +
