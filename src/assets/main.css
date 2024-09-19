@@ -1,1 +1,12 @@
 @import './base.css';
+
+.modal-window {
+  position: fixed;
+  left: var(--margin-l);
+  right: var(--margin-l);
+  top: 50%;
+  transform: translateY(-50%);
+  padding: var(--margin-l);
+  background-color: var(--color-frame-background);
+  border-radius: var(--radius-l);
+}

@@ -4,6 +4,7 @@ import { reactive } from 'vue'
 const STORAGE_KEY = 'trackers'
 
 export type Tracker = {
+  id: number
   name: string
   dateCreated: number
   resets: number[]
@@ -48,11 +49,15 @@ export const useTrackersStore = defineStore('trackers', () => {
     writeToStorage()
   }
 
+  const getTrackerByID = (id: number) => {
+    return trackers.find((t) => t.id == id)
+  }
+
   const resetTracker = (tracker: Tracker) => {
     tracker.resets.push(Date.now())
     calculateBest(tracker)
     writeToStorage()
   }
 
-  return { trackers, createNewTracker, resetTracker, trackerBests }
+  return { trackers, createNewTracker, resetTracker, trackerBests, getTrackerByID }
 })

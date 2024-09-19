@@ -12,6 +12,7 @@ const emit = defineEmits<{
 
 const createTracker = () => {
   const newTracker: Tracker = {
+    id: (store.trackers[store.trackers.length - 1]?.id ?? 0) + 1,
     name: name.value,
     dateCreated: Date.now(),
     resets: []
