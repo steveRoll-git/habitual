@@ -45,12 +45,12 @@ export const useTrackersStore = defineStore('trackers', () => {
   }
 
   const createNewTracker = (name: string) => {
-    const newTracker = {
+    const newTracker = reactive<Tracker>({
       id: (trackers[trackers.length - 1]?.id ?? 0) + 1,
       name,
       dateCreated: Date.now(),
       resets: []
-    }
+    })
     trackers.push(newTracker)
     writeToStorage()
     return newTracker
