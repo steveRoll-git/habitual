@@ -2,9 +2,10 @@
 import { useTrackersStore, type Tracker } from '@/stores/trackers'
 import NoTrackers from '@/components/NoTrackers.vue'
 import NewTrackerForm from '@/components/NewTrackerForm.vue'
-import { onMounted, ref } from 'vue'
+import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import TrackerPreview from '@/components/TrackerPreview.vue'
+import { usePageTitle } from '@/composables/pageTitle'
 
 const router = useRouter()
 
@@ -17,9 +18,7 @@ const newTrackerCreated = (tracker: Tracker) => {
   router.push(`/tracker/${tracker.id}`)
 }
 
-onMounted(() => {
-  document.title = 'Habitual'
-})
+usePageTitle({ root: true })
 </script>
 
 <template>
