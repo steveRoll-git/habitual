@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json.schemastore.org/web-manifest.json",
+  "name": "Habitual",
+  "start_url": "/",
+  "display": "standalone",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "192x192 512x512"
+    }
+  ]
+}
