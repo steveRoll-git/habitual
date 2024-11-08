@@ -10,6 +10,7 @@ import IconAdd from '@/components/icons/IconAdd.vue'
 import IconEdit from '@/components/icons/IconEdit.vue'
 import RemoveTrackerForm from '@/components/RemoveTrackerForm.vue'
 import IconCheck from '@/components/icons/IconCheck.vue'
+import RenameTrackerForm from '@/components/RenameTrackerForm.vue'
 
 const router = useRouter()
 
@@ -20,6 +21,7 @@ const trackersExist = computed(() => store.trackers.length > 0)
 const creatingNewTracker = ref(false)
 const editing = ref(false)
 const removingTracker = ref<Tracker | undefined>()
+const renamingTracker = ref<Tracker | undefined>()
 
 const newTrackerCreated = (tracker: Tracker) => {
   creatingNewTracker.value = false
@@ -47,6 +49,7 @@ usePageTitle({ root: true })
       :tracker="tracker"
       :editing="editing"
       @remove="(t) => (removingTracker = t)"
+      @rename="(t) => (renamingTracker = t)"
     />
   </div>
   <NoTrackers v-else @new-tracker-click="creatingNewTracker = true" />
@@ -59,6 +62,11 @@ usePageTitle({ root: true })
     v-if="removingTracker"
     :tracker="removingTracker"
     @close="removingTracker = undefined"
+  />
+  <RenameTrackerForm
+    v-if="renamingTracker"
+    :tracker="renamingTracker"
+    @close="renamingTracker = undefined"
   />
 </template>
 

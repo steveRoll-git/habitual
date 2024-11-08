@@ -3,6 +3,7 @@ import { useTrackerDuration } from '@/composables/trackerTimer'
 import type { Tracker } from '@/stores/trackers'
 import { getDurationString } from '@/util'
 import IconDelete from './icons/IconDelete.vue'
+import IconEdit from './icons/IconEdit.vue'
 
 const props = defineProps<{
   tracker: Tracker
@@ -11,6 +12,7 @@ const props = defineProps<{
 
 const emit = defineEmits<{
   remove: [tracker: Tracker]
+  rename: [tracker: Tracker]
 }>()
 
 const { duration } = useTrackerDuration(props.tracker)
@@ -18,7 +20,10 @@ const { duration } = useTrackerDuration(props.tracker)
 
 <template>
   <div style="display: flex; align-items: center; gap: var(--margin-m)">
-    <IconDelete v-if="editing" width="32" height="32" @click="emit('remove', tracker)" />
+    <div v-if="editing" style="display: flex; gap: var(--margin-m)">
+      <IconDelete width="24" height="24" @click="emit('remove', tracker)" />
+      <IconEdit width="24" height="24" @click="emit('rename', tracker)" />
+    </div>
     <RouterLink class="tracker" :to="`/tracker/${tracker.id}`">
       {{ tracker.name }}
       <div class="timer">
