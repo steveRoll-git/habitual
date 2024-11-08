@@ -6,8 +6,12 @@ import { computed } from 'vue'
 import ResetSlider from './ResetSlider.vue'
 import IconHistory from './icons/IconHistory.vue'
 import IconTrophy from './icons/IconTrophy.vue'
+import IconBack from './icons/IconBack.vue'
+import { useRouter } from 'vue-router'
 
 const store = useTrackersStore()
+
+const router = useRouter()
 
 const props = defineProps<{
   tracker: Tracker
@@ -41,6 +45,7 @@ const resetTracker = () => {
 
 <template>
   <div class="tracker-fullscreen">
+    <IconBack class="back-button" @click="() => router.back()" />
     <div class="timer-group">
       <div class="timer-font timer-frame">
         <div class="digit-colon-group" :class="{ 'low-emphasis': days == 0 }">
@@ -57,10 +62,7 @@ const resetTracker = () => {
           </div>
           :
         </div>
-        <div
-          class="digit-colon-group"
-          :class="{ 'low-emphasis': minutes == 0 && hours == 0 && days == 0 }"
-        >
+        <div class="digit-colon-group" :class="{ 'low-emphasis': minutes == 0 && hours == 0 && days == 0 }">
           <div class="digit-label-group">
             {{ minutes.toString().padStart(2, '0') }}
             <div class="label">Minutes</div>
@@ -109,6 +111,14 @@ const resetTracker = () => {
 <style scoped>
 .low-emphasis {
   opacity: 0.25;
+}
+
+.back-button {
+  position: absolute;
+  left: var(--margin-m);
+  top: var(--margin-m);
+  width: 32px;
+  height: 32px;
 }
 
 .tracker-fullscreen {
