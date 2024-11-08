@@ -38,6 +38,9 @@ body {
 }
 
 #app {
+  position: relative;
+  max-width: 630px;
+  margin: auto;
   height: 100vh;
   display: flex;
   flex-direction: column;

@@ -125,8 +125,7 @@ const resetTracker = () => {
 }
 
 .tracker-fullscreen {
-  position: fixed;
-  width: 100vw;
+  position: relative;
   height: 100%;
 }
 
