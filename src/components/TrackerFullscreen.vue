@@ -62,7 +62,10 @@ const resetTracker = () => {
           </div>
           :
         </div>
-        <div class="digit-colon-group" :class="{ 'low-emphasis': minutes == 0 && hours == 0 && days == 0 }">
+        <div
+          class="digit-colon-group"
+          :class="{ 'low-emphasis': minutes == 0 && hours == 0 && days == 0 }"
+        >
           <div class="digit-label-group">
             {{ minutes.toString().padStart(2, '0') }}
             <div class="label">Minutes</div>

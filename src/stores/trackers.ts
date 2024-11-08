@@ -56,6 +56,11 @@ export const useTrackersStore = defineStore('trackers', () => {
     return newTracker
   }
 
+  const removeTracker = (tracker: Tracker) => {
+    trackers.splice(trackers.indexOf(tracker), 1)
+    writeToStorage()
+  }
+
   const getTrackerByID = (id: number) => {
     return trackers.find((t) => t.id == id)
   }
@@ -66,5 +71,5 @@ export const useTrackersStore = defineStore('trackers', () => {
     writeToStorage()
   }
 
-  return { trackers, createNewTracker, resetTracker, trackerBests, getTrackerByID }
+  return { trackers, createNewTracker, removeTracker, resetTracker, trackerBests, getTrackerByID }
 })
